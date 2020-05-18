@@ -1,4 +1,4 @@
-module wyrm.fr/brendan/tabdecharge
+module github.com/Brndn/tabdecharge
 
 go 1.14
 
