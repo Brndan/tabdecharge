@@ -8,11 +8,11 @@ Un programme en Go destiné à générer automatiquement les tableaux de déchar
 
 
 
-`tabdecharge -q quotité.xlsx template.xlsx`
+`tabdecharge [-p motdepasse] -q quotité.xlsx template.xlsx`
 
+`-p` est le mot de passe de la feuille de calcul. Si le paramètre est omis, le mot de passe est par défaut `pandace`.
 
-
-`-q` ou `–quotite` est obligatoirement suivi du chemin vers le un XLSX structuré ainsi :
+`-q` est obligatoirement suivi du chemin vers le un XLSX structuré ainsi :
 
 
 
