@@ -12,8 +12,9 @@ Tous les fichiers, en entrée comme en sortie, sont des XLSX. */
 // TODO
 // → Gestion des options : fonction qui donne l'usage du programme
 // → créer une option export avec le nom d'un dossier avec "export" comme défaut
-// → Git
 // → Fonction spécialisée pour ouvrir les fichiers
+// Identifier "Feuille1"
+// → Protéger feuille
 
 import (
 	"flag"
@@ -26,7 +27,13 @@ import (
 	"github.com/360EntSecGroup-Skylar/excelize"
 )
 
+// Gérer les goroutines
 var wg sync.WaitGroup
+
+var (
+	sha1ver   string // identifiant version Git
+	buildTime string // quand le programme est compilé
+)
 
 // fonction qui prend en argument un nom de fichier
 // qui renvoie une map avec la quotité par syndicat
@@ -37,6 +44,7 @@ func loadSyndicats(fichierQuotite string) map[string]string {
 		os.Exit(1)
 	}
 	rows := f.GetRows("Feuille1")
+	// Ignore		  1re ligne    dernière ligne du fichier
 	for _, row := range rows[1 : len(rows)-1] {
 		baseSyndicats[row[0]] = row[1]
 	}
@@ -63,9 +71,17 @@ func genereTableau(cheminTemplate string, outputFolder string, syndicat string, 
 }
 
 func main() {
-	var quotite string
+	var (
+		quotite     string
+		versionFlag bool
+	)
 	flag.StringVar(&quotite, "q", "", "Fichier quotité")
+	flag.BoolVar(&versionFlag, "v", false, "Print version info and exit.")
 	flag.Parse()
+	if versionFlag == true {
+		fmt.Printf("Date de compilation : %s\nIdentifiant de version : %s", buildTime, sha1ver)
+		os.Exit(0)
+	}
 	if quotite == "" {
 		fmt.Println("Option -q manquante")
 		flag.PrintDefaults()
