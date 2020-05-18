@@ -33,6 +33,6 @@ Les en-têtes de colonne doivent être présentes, de même qu’une ligne « t
 
 ## Compilation
 
-Le script `construire` permet de compiler le programme.
+Le script `build.sh` permet de compiler le programme.
 
 Pour avoir une idée de quelles plateformes sont supportées, utilisez la commande `go tool dist list`
