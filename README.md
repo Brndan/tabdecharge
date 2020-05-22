@@ -33,6 +33,8 @@ Les en-têtes de colonne doivent être présentes, de même qu’une ligne « t
 
 ## Compilation
 
-Le script `build.sh` permet de compiler le programme.
+Le programme est codé en [Go](https://golang.org/dl/).
+
+Le script `build.sh` permet de compiler le programme sous Linux et macOS,  `build.ps1` sous Windows.
 
 Pour avoir une idée de quelles plateformes sont supportées, utilisez la commande `go tool dist list`

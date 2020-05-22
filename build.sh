@@ -19,6 +19,9 @@ exit 0
 
 fi
 
+rm -r dist/
+mkdir -p dist/{linux,macos,windows}
+
 env GOOS=linux GOARCH=amd64 go build -ldflags "-X main.sha1ver=`git rev-parse --short HEAD` -X main.buildTime=$now -w -s"  -o dist/linux/ github.com/Brndn/tabdecharge
 env GOOS=windows GOARCH=amd64 go build -ldflags "-X main.sha1ver=`git rev-parse --short HEAD` -X main.buildTime=$now -w -s" -o dist/windows/ github.com/Brndn/tabdecharge
 env GOOS=darwin GOARCH=amd64 go build -ldflags "-X main.sha1ver=`git rev-parse --short HEAD` -X main.buildTime=$now -w -s" -o dist/macos/ github.com/Brndn/tabdecharge
