@@ -45,7 +45,7 @@ func main() {
 	flag.BoolVar(&versionFlag, "v", false, "Print version info and exit.")
 	flag.StringVar(&passwordFlag, "p", "pandace", "Mot de passe de protection des cellules, défaut pandace")
 	flag.Parse()
-	if versionFlag == true {
+	if versionFlag {
 		fmt.Printf("Date de compilation : %s\nIdentifiant de version : %s", buildTime, sha1ver)
 		os.Exit(0)
 	}
