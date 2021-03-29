@@ -108,9 +108,9 @@ func genereTableau(cheminTemplate string, outputFolder string, syndicat string, 
 		fmt.Println("Problème à l'ouverture du fichier")
 		os.Exit(1)
 	}
-	f.SetCellValue("Feuille1", "A74", syndicat)
+	f.SetCellValue("Feuille1", "A64", syndicat)
 	dechargeFlt, _ := strconv.ParseFloat(decharge, 64)
-	f.SetCellValue("Feuille1", "B74", dechargeFlt)
+	f.SetCellValue("Feuille1", "B64", dechargeFlt)
 	// force le recalcul au démarrage du tableur. Sinon pas d'actualisation
 	f.UpdateLinkedValue()
 	var protection excelize.FormatSheetProtection
