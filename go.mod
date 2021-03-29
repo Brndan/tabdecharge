@@ -1,5 +1,5 @@
 module github.com/Brndn/tabdecharge
 
-go 1.14
+go 1.16
 
-require github.com/360EntSecGroup-Skylar/excelize v1.4.1
+require github.com/360EntSecGroup-Skylar/excelize/v2 v2.3.2 // indirect

@@ -24,7 +24,7 @@ import (
 	"strconv"
 	"sync"
 
-	"github.com/360EntSecGroup-Skylar/excelize"
+	"github.com/360EntSecGroup-Skylar/excelize/v2"
 )
 
 // Gérer les goroutines
@@ -77,10 +77,12 @@ func main() {
 	// et on recrée un dossier vide
 	os.Mkdir(export, 0744)
 
+    fmt.Println("Lancement des tâches.")
+    wg.Add(len(base))
 	for syndicat, decharge := range base {
-		wg.Add(1)
 		go genereTableau(template, export, syndicat, decharge, passwordFlag)
 	}
+	fmt.Println("Tâches lancées.")
 	wg.Wait()
 
 }
@@ -93,7 +95,7 @@ func loadSyndicats(fichierQuotite string) map[string]string {
 	if err != nil {
 		os.Exit(1)
 	}
-	rows := f.GetRows("Feuille1")
+	rows, _ := f.GetRows("Feuille1")
 	// Ignore		  1re ligne    dernière ligne du fichier
 	for _, row := range rows[1 : len(rows)-1] {
 		baseSyndicats[row[0]] = row[1]
@@ -108,6 +110,7 @@ func genereTableau(cheminTemplate string, outputFolder string, syndicat string, 
 		fmt.Println("Problème à l'ouverture du fichier")
 		os.Exit(1)
 	}
+	fmt.Println("Je m’occupe de ",syndicat)
 	f.SetCellValue("Feuille1", "A64", syndicat)
 	dechargeFlt, _ := strconv.ParseFloat(decharge, 64)
 	f.SetCellValue("Feuille1", "B64", dechargeFlt)
